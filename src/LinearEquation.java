@@ -23,19 +23,47 @@ public class LinearEquation {
     public double yIntercept() {
         return y1 - (slope() * x1);
     }
-    public String equation() {
+    public double num() {
+        return (x2 - x1);
+    }
+    public double den() {
+        return (y2 - y1);
+    }
+    public String makeSlope() {
+        if (num() > 0 && den() > 0) {
+            return ((den()) + "/" + num());
+        } else if (num() > 0 && den() < 0) {
+            return ((den()) + "/" + num());
+        } else if (num() < 0 && den() > 0) {
+            return ("-" + (den()) + "/" + Math.abs(num()));
+        } else {
+            return (Math.abs(den())) + "/" + Math.abs(num());
+        }
+    }
+    public String equ() {
         if (y1 == y2) {
             return "y = " + y1;
+        } else if (num() == den()) {
+            return "y = x" + yInter();
+        } else if (((den()) / num()) % 1.0 == 0) {
+            return "y = " + ((int)( (den()) / num())) + "x" + yInter();
         } else {
-            return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x" + " + " + yIntercept();
+            return "y = " + makeSlope() + yInter();
         }
+    }
+    public String yInter() {
+        if (yIntercept() > 0) {
+            return " + " + yIntercept();
+        } else if (yIntercept() < 0) {
+            return " " + yIntercept();
+        } else return "";
     }
     public String coordinateForX(double x) {
         return  "(" + x + ", " + (slope() * x + yIntercept()) + ")";
     }
     public String lineInfo() {
         return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")" + "\n" +
-                "The equation of the line between the two points is: " + equation() + "\n" +
+                "The equation of the line between the two points is: " + equ() + "\n" +
                 "The y-intercept of this line is: " + yIntercept() + "\n" +
                 "The slope of this line is: " + slope() + "\n" +
                 "The distance between these points is: " + distance();

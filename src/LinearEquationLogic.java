@@ -6,6 +6,7 @@ public class LinearEquationLogic {
     private int x2;
     private int y1;
     private int y2;
+    private boolean stop = true;
     boolean n = true;
 
 
@@ -18,12 +19,15 @@ public class LinearEquationLogic {
         System.out.println("Welcome to the linear equation calculator!");
         while (n) {
             getData();
-            LinearEquation n1 = new LinearEquation(x1, y1, x2, y2);
-            System.out.println(n1.lineInfo());
-            System.out.println("\n" + "Enter a value for x: ");
-            System.out.println(n1.coordinateForX(scan.nextDouble()));
-            scan.nextLine();
+            if (stop == true) {
+                LinearEquation n1 = new LinearEquation(x1, y1, x2, y2);
+                System.out.println(n1.lineInfo());
+                System.out.println("\n" + "Enter a value for x: ");
+                System.out.println(n1.coordinateForX(scan.nextDouble()));
+                scan.nextLine();
+            }
             System.out.println("Would you like another pair of coordinates? y/n: ");
+            stop = true;
             if (scan.nextLine().equals("n")) {
                 n = false;
             }
@@ -40,6 +44,10 @@ public class LinearEquationLogic {
         String c2 = scan.nextLine();
         x2 = parseInt(c2.substring(1, c2.indexOf(",")));
         y2 = parseInt(c2.substring(c2.indexOf(",") + 2, c2.length() - 1));
+        if (x1 == x2) {
+            stop = false;
+            System.out.println("You cannot enter two coordinates with the same x values");
+        }
         System.out.println();
     }
 }
