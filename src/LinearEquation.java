@@ -31,24 +31,26 @@ public class LinearEquation {
     }
     public String makeSlope() {
         if (num() > 0 && den() > 0) {
-            return ((den()) + "/" + num());
+            return ((int)(den()) + "/" + (int)num());
         } else if (num() > 0 && den() < 0) {
-            return ((den()) + "/" + num());
+            return ((int)(den()) + "/" + (int)num());
         } else if (num() < 0 && den() > 0) {
-            return ("-" + (den()) + "/" + Math.abs(num()));
+            return ("-" + ((int)den()) + "/" + (int)Math.abs(num()));
         } else {
-            return (Math.abs(den())) + "/" + Math.abs(num());
+            return ((int) Math.abs(den())) + "/" + (int)Math.abs(num());
         }
     }
     public String equ() {
         if (y1 == y2) {
             return "y = " + y1;
-        } else if (num() == den()) {
+        } else if (slope() == 1.0) {
             return "y = x" + yInter();
+        } else if (slope() == -1.0) {
+            return "y = -x" + yInter();
         } else if (((den()) / num()) % 1.0 == 0) {
-            return "y = " + ((int)( (den()) / num())) + "x" + yInter();
+            return "y = " + ((int) slope()) + "x" + yInter();
         } else {
-            return "y = " + makeSlope() + yInter();
+            return "y = " + makeSlope() + "x" + yInter();
         }
     }
     public String yInter() {
